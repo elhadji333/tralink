@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><link rel="canonical" href="https://elhadji333.github.io/tralink/">
-<meta property="og:url" content="https://elhadji333.github.io/tralink/"><meta name="google-site-verification" content="fpT0RBLTljMQvxwDcFVKSUev7SKdnrDKWRlhlPI0mLI" />
-
+<meta charset="utf-8">
+<link rel="canonical" href="https://elhadji333.github.io/tralink/">
+<meta property="og:url" content="https://elhadji333.github.io/tralink/">
+<meta name="google-site-verification" content="fpT0RBLTljMQvxwDcFVKSUev7SKdnrDKWRlhlPI0mLI" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tralink – Marketing digital à Dakar, Sénégal</title>
 <meta name="description" content="Tralink, agence de marketing digital à Rufisque, Dakar : référencement SEO, publicité en ligne, réseaux sociaux et emailing pour attirer plus de clients.">
@@ -63,13 +64,38 @@ textarea{min-height:120px;resize:vertical}
 footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
 @media (max-width:760px){nav{display:none}.hero,.contact,.row{grid-template-columns:1fr}ol{grid-template-columns:1fr 1fr}.hero{padding-top:20px}}
 @media (prefers-reduced-motion:reduce){.line{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:24px;padding-bottom:4px}
+.tab{font:600 16px var(--body);background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.tp{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center}
+.tp[hidden]{display:none}
+.tp h3{font:700 26px var(--display);margin:0 0 10px}
+.tp h4{font:700 16px var(--body);margin:16px 0 6px}
+.tp p{margin:0 0 8px;color:var(--muted)}
+.tp ul{margin:0;padding-left:18px;color:var(--muted)}
+.tp li{margin-bottom:5px}
+.tp .price{font:700 19px var(--display);color:var(--ink);margin-top:16px}
+.ill{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.ill svg{display:block;width:100%;height:auto}
+.ill .p{fill:var(--panel)}.ill .bd{stroke:var(--line);stroke-width:2;fill:none}.ill .ac{fill:var(--accent)}.ill .mu{fill:var(--line)}
+.ill .sk{stroke:var(--accent);stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ill .skw{stroke:var(--on-accent);stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ill .hl{fill:var(--hl)}.ill .oa{fill:var(--on-accent);opacity:.85}.ill .lb{fill:var(--muted);font:600 12px var(--body);text-anchor:middle}
+@media (max-width:760px){.tp{grid-template-columns:1fr}}
+.about{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.pic,.pic-ph{width:180px;height:180px;border-radius:50%;border:4px solid var(--line)}
+.pic{object-fit:cover;display:block}
+.pic-ph{background:var(--accent);color:var(--on-accent);display:none;align-items:center;justify-content:center;font:800 46px var(--display)}
+.about h3{font:700 26px var(--display);margin:0 0 4px}
+.about p{margin:0 0 10px;color:var(--muted)}
+@media (max-width:760px){.about{grid-template-columns:1fr;justify-items:center;text-align:center}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
   <a class="logo" href="#top" aria-label="Tralink, accueil"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="14" width="26" height="20" rx="10" fill="none" stroke="currentColor" stroke-width="5"/><rect x="18" y="14" width="26" height="20" rx="10" fill="none" style="stroke:var(--muted)" stroke-width="5"/></svg>Tralink</a>
-  <nav><a href="#services">Services</a><a href="#methode">Méthode</a><a href="#audit">Audit</a><a href="#contact">Contact</a></nav>
+  <nav><a href="#services">Services</a><a href="#methode">Méthode</a><a href="#audit">Audit</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
 </header>
 
 <main id="top">
@@ -77,8 +103,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
   <div>
     <h1>Plus de clients qualifiés, mesurés au centime près.</h1>
     <p class="lead">Nous concevons et pilotons vos campagnes en ligne pour que chaque euro investi vous rapporte des demandes, des ventes et des rendez-vous.</p>
-    <a class="btn" href="#contact">Demander un audit</a>
-  </div>
+    </div>
   <div class="chart" role="img" aria-label="Courbe illustrative d’une croissance de demandes clients sur six mois">
     <svg viewBox="0 0 320 200">
       <line class="grid" x1="0" y1="50" x2="320" y2="50"/><line class="grid" x1="0" y1="100" x2="320" y2="100"/><line class="grid" x1="0" y1="150" x2="320" y2="150"/>
@@ -91,13 +116,10 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
 
 <section id="services">
   <h2>Ce que nous faisons pour vous</h2>
-  <div class="row"><h3>Référencement (SEO)</h3><div><p>Votre site apparaît en tête de Google quand vos clients vous cherchent, sans payer chaque clic.</p><ul><li>Audit technique de votre site</li><li>Choix des mots-clés que vos clients tapent vraiment</li><li>Optimisation de vos pages et création de contenus</li><li>Suivi mensuel de vos positions</li></ul><p class="price">À partir de 75 000 FCFA / mois</p><p class="for">Idéal pour : des résultats durables, qui s’installent sur plusieurs mois.</p></div></div>
-  <div class="row"><h3>Publicité en ligne</h3><div><p>Des annonces sur Google, Facebook et Instagram qui touchent les bonnes personnes, au bon moment.</p><ul><li>Définition de votre audience et de votre budget</li><li>Création des visuels et des textes des annonces</li><li>Réglages chaque semaine selon les résultats</li><li>Rapport clair : coût par demande et clients obtenus</li></ul><p class="price">À partir de 75 000 FCFA / mois, hors budget publicitaire</p><p class="for">Idéal pour : obtenir des demandes rapidement.</p></div></div>
-  <div class="row"><h3>Réseaux sociaux</h3><div><p>Une présence régulière et professionnelle qui fait connaître votre marque et crée du lien avec votre audience.</p><ul><li>Ligne éditoriale et calendrier de publications</li><li>Création des visuels et rédaction des posts</li><li>Animation : réponses aux messages et aux commentaires</li><li>Bilan mensuel de votre audience</li></ul><p class="price">À partir de 50 000 FCFA / mois</p><p class="for">Idéal pour : devenir connu et inspirer confiance.</p></div></div>
-  <div class="row"><h3>Emailing</h3><div><p>Des messages envoyés au bon moment pour transformer un contact en client, puis en client fidèle.</p><ul><li>Organisation de vos contacts, avec leur accord</li><li>Séquences automatiques : bienvenue, relance, fidélisation</li><li>Newsletters rédigées et mises en page</li><li>Suivi des ouvertures et des clics</li></ul><p class="price">À partir de 50 000 FCFA / mois</p><p class="for">Idéal pour : fidéliser vos clients et relancer vos contacts.</p></div></div>
+  <div class="tabs" role="tablist" aria-label="Nos services"><button class="tab" role="tab" id="tb0" aria-controls="tp0" aria-selected="true" tabindex="0" type="button">Référencement</button><button class="tab" role="tab" id="tb1" aria-controls="tp1" aria-selected="false" tabindex="-1" type="button">Publicité</button><button class="tab" role="tab" id="tb2" aria-controls="tp2" aria-selected="false" tabindex="-1" type="button">Réseaux sociaux</button><button class="tab" role="tab" id="tb3" aria-controls="tp3" aria-selected="false" tabindex="-1" type="button">Emailing</button></div>
+  <div class="tp" role="tabpanel" id="tp0" aria-labelledby="tb0"><div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Illustration : un site classé premier dans les résultats de recherche"><rect x="20" y="14" width="280" height="34" rx="17" class="p bd"/><circle cx="42" cy="31" r="7" class="sk" stroke-width="3"/><path d="M47 36l6 6" class="sk" stroke-width="3"/><rect x="66" y="27" width="120" height="8" rx="4" class="mu"/><rect x="20" y="62" width="280" height="44" rx="8" class="ac"/><circle cx="46" cy="84" r="12" class="hl"/><text x="46" y="89" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="14" fill="#12233F">1</text><rect x="70" y="74" width="140" height="7" rx="3" class="oa"/><rect x="70" y="88" width="96" height="6" rx="3" class="oa" opacity=".5"/><path d="M270 94V74M261 82l9-9 9 9" class="skw"/><rect x="20" y="118" width="280" height="32" rx="8" class="p bd"/><rect x="36" y="130" width="130" height="7" rx="3" class="mu"/><rect x="20" y="160" width="280" height="32" rx="8" class="p bd"/><rect x="36" y="172" width="110" height="7" rx="3" class="mu"/></svg></div><div><h3>Référencement (SEO)</h3><p>Le référencement place votre site en tête de Google quand vos clients cherchent ce que vous vendez, sans payer chaque clic.</p><h4>Nos actions</h4><ul><li>Audit technique de votre site</li><li>Choix des mots-clés que vos clients tapent vraiment</li><li>Optimisation de vos pages et création de contenus utiles</li><li>Suivi mensuel de vos positions</li></ul><h4>Ce que vous obtenez</h4><p>Plus de visites qualifiées, qui s’installent dans la durée.</p><h4>Idéal pour</h4><p>les résultats durables, qui s’installent sur plusieurs mois.</p><p class="price">À partir de 75 000 FCFA / mois</p></div></div><div class="tp" role="tabpanel" id="tp1" aria-labelledby="tb1" hidden><div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Illustration : une cible atteinte et des résultats en hausse"><circle cx="100" cy="104" r="76" class="p bd"/><circle cx="100" cy="104" r="50" class="ac" opacity=".25"/><circle cx="100" cy="104" r="26" class="ac"/><circle cx="100" cy="104" r="8" class="hl"/><path d="M178 36L108 98M178 36l-18 2M178 36l-2 18" class="sk"/><path d="M200 176h104" class="bd"/><rect x="208" y="124" width="22" height="48" rx="4" class="ac" opacity=".4"/><rect x="238" y="96" width="22" height="76" rx="4" class="ac" opacity=".7"/><rect x="268" y="60" width="22" height="112" rx="4" class="ac"/><text x="249" y="192" class="lb">Clics</text></svg></div><div><h3>Publicité en ligne</h3><p>Des annonces sur Google, Facebook et Instagram montrées aux bonnes personnes, au bon moment, pour obtenir des demandes rapidement.</p><h4>Nos actions</h4><ul><li>Définition de votre audience, de votre zone et de votre budget</li><li>Création des visuels et des textes des annonces</li><li>Réglages chaque semaine selon les résultats</li><li>Rapport clair : coût par demande et clients obtenus</li></ul><h4>Ce que vous obtenez</h4><p>Des demandes de clients mesurées, avec un budget que vous contrôlez.</p><h4>Idéal pour</h4><p>obtenir des demandes rapidement.</p><p class="price">À partir de 75 000 FCFA / mois, hors budget publicitaire</p></div></div><div class="tp" role="tabpanel" id="tp2" aria-labelledby="tb2" hidden><div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Illustration : un téléphone avec une publication et des mentions j’aime"><rect x="100" y="8" width="120" height="184" rx="18" class="p bd"/><rect x="114" y="26" width="92" height="64" rx="8" class="ac"/><circle cx="160" cy="58" r="14" class="hl"/><rect x="114" y="102" width="70" height="7" rx="3" class="mu"/><rect x="114" y="116" width="50" height="6" rx="3" class="mu"/><rect x="114" y="140" width="92" height="38" rx="8" class="mu" opacity=".6"/><rect x="22" y="44" width="64" height="36" rx="12" class="p bd"/><circle cx="40" cy="62" r="4" class="ac"/><circle cx="54" cy="62" r="4" class="ac"/><circle cx="68" cy="62" r="4" class="ac"/><rect x="236" y="104" width="64" height="36" rx="12" class="p bd"/><g transform="translate(268 122)"><path d="M0-4C-6-12-18-4-10 6L0 16 10 6C18-4 6-12 0-4Z" class="hl" transform="scale(.8)"/></g></svg></div><div><h3>Réseaux sociaux</h3><p>Une présence régulière et professionnelle qui fait connaître votre marque et crée du lien avec votre audience.</p><h4>Nos actions</h4><ul><li>Ligne éditoriale et calendrier de publications</li><li>Création des visuels et rédaction des posts</li><li>Animation : réponses aux messages et aux commentaires</li><li>Bilan mensuel de votre audience</li></ul><h4>Ce que vous obtenez</h4><p>Une communauté plus grande et plus fidèle, et une marque qui inspire confiance.</p><h4>Idéal pour</h4><p>devenir connu et inspirer confiance.</p><p class="price">À partir de 50 000 FCFA / mois</p></div></div><div class="tp" role="tabpanel" id="tp3" aria-labelledby="tb3" hidden><div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Illustration : une enveloppe et trois messages envoyés au fil du temps"><path d="M60 30H260" class="bd"/><circle cx="60" cy="30" r="12" class="ac"/><circle cx="160" cy="30" r="12" class="ac"/><circle cx="260" cy="30" r="12" class="ac"/><text x="60" y="58" class="lb">Bienvenue</text><text x="160" y="58" class="lb">Relance</text><text x="260" y="58" class="lb">Fidélité</text><rect x="84" y="80" width="152" height="108" rx="10" class="p bd"/><path d="M84 92l76 52 76-52" class="sk" stroke-width="3"/><circle cx="226" cy="90" r="12" class="hl"/></svg></div><div><h3>Emailing</h3><p>Des messages envoyés au bon moment pour transformer un contact en client, puis en client fidèle.</p><h4>Nos actions</h4><ul><li>Organisation de vos contacts, avec leur accord</li><li>Séquences automatiques : bienvenue, relance, fidélisation</li><li>Newsletters rédigées et mises en page</li><li>Suivi des ouvertures et des clics</li></ul><h4>Ce que vous obtenez</h4><p>Des relances qui se font toutes seules et des clients qui reviennent.</p><h4>Idéal pour</h4><p>fidéliser vos clients et relancer vos contacts.</p><p class="price">À partir de 50 000 FCFA / mois</p></div></div>
   <p style="margin-top:24px;font-size:15px">Prix de lancement. Le tarif exact dépend de vos besoins et vous est confirmé avant de commencer.</p>
-  <p style="margin-top:14px"><a class="btn" href="#contact">Pas sûr de ce qu’il vous faut ? Demandez un audit</a></p>
-</section>
+  </section>
 
 <section id="methode">
   <h2>Une méthode en quatre étapes</h2>
@@ -113,7 +135,18 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
   <h2>Deux façons de commencer</h2>
   <div class="row"><h3>Audit express<span>25 000 FCFA</span></h3><div><p>Un échange de 30 minutes pour faire le point sur votre présence en ligne.</p><ul><li>3 constats clairs sur votre situation</li><li>Vos priorités pour attirer plus de clients</li><li>Montant déduit de l’audit complet si vous continuez</li></ul></div></div>
   <div class="row"><h3>Audit complet<span>À partir de 150 000 FCFA</span></h3><div><p>Une analyse détaillée de votre site, de vos réseaux et de votre publicité, avec un plan d’action chiffré.</p><ul><li>Rapport écrit et présentation commentée</li><li>Analyse de vos concurrents</li><li>Plan d’action sur 3 mois avec budget</li><li>Montant déduit de votre premier mois de suivi si vous continuez avec nous</li></ul></div></div>
-  <p style="margin-top:28px"><a class="btn" href="#contact">Demander un audit</a></p>
+  </section>
+
+<section id="apropos">
+  <h2>Votre interlocuteur</h2>
+  <div class="about">
+    <div><img id="tl-photo" class="pic" src="photo.jpg" alt="Portrait d’El Hadji Tra, fondateur de Tralink" width="180" height="180"><div id="tl-ph" class="pic-ph" aria-hidden="true">EHT</div></div>
+    <div>
+      <h3>El Hadji Tra</h3>
+      <p><strong>Fondateur de Tralink</strong> · Rufisque, Dakar</p>
+      <p>J’accompagne les entreprises de Rufisque et de Dakar pour attirer plus de clients grâce au référencement, à la publicité en ligne, aux réseaux sociaux et à l’emailing.</p>
+    </div>
+  </div>
 </section>
 
 <section id="contact">
@@ -123,7 +156,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
       <p class="lead">Décrivez votre activité en quelques lignes. Nous vous répondons sous 48 heures avec un premier avis.</p>
     </div>
     <div>
-      <a class="btn" href="https://tally.so/r/gbqGPK" target="_blank" rel="noopener">Envoyer ma demande</a>
+      <a class="btn" href="https://tally.so/r/gbqGPK" target="_blank" rel="noopener">Remplir le formulaire de demande d’audit</a>
       <p style="margin-top:14px;font-size:15px">Le formulaire s’ouvre dans un nouvel onglet : 4 champs, moins d’une minute.</p>
     </div>
   </div>
@@ -132,5 +165,60 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
 
 <footer>© Tralink · El Hadji Tra<br>Rufisque, Dakar · <a href="tel:+221778297047">+221 77 829 70 47</a> · <a href="mailto:digi@tralink.com">digi@tralink.com</a></footer>
 </div>
+<!-- Assistant Tralink : à coller juste avant la fin de la page -->
+<style>
+#tl-btn{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:14px 22px;font:600 16px var(--body);cursor:pointer;box-shadow:0 6px 18px rgba(11,23,48,.3)}
+#tl-box{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:50;width:min(360px,calc(100vw - 36px));max-height:min(520px,70vh);display:none;flex-direction:column;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(11,23,48,.3);overflow:hidden}
+#tl-box.open{display:flex}
+#tl-head{padding:14px 16px;font:700 17px var(--display);border-bottom:1px solid var(--line)}
+#tl-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.tl-m{max-width:88%;padding:10px 12px;border-radius:10px;white-space:pre-wrap;line-height:1.45}
+.tl-b{background:var(--bg);align-self:flex-start}
+.tl-u{background:var(--accent);color:var(--on-accent);align-self:flex-end}
+#tl-q{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+#tl-q button{font:500 14px var(--body);background:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+#tl-f{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+#tl-f input{flex:1;font:400 16px var(--body);padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-width:0}
+#tl-f button{font:600 15px var(--body);background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:0 16px;cursor:pointer}
+</style>
+<button id="tl-btn" type="button" aria-expanded="false" aria-controls="tl-box">Une question ?</button>
+<div id="tl-box" role="dialog" aria-label="Assistant Tralink">
+  <div id="tl-head">Assistant Tralink</div>
+  <div id="tl-msgs" aria-live="polite"></div>
+  <div id="tl-q"></div>
+  <form id="tl-f"><input id="tl-in" type="text" placeholder="Posez votre question" aria-label="Votre question" autocomplete="off"><button type="submit">Envoyer</button></form>
+</div>
+<script>
+(function(){
+var FORM="https://tally.so/r/gbqGPK";
+var R={
+services:"Nous proposons 4 services :\n• Référencement (SEO) : être en tête de Google\n• Publicité en ligne : annonces Google, Facebook et Instagram\n• Réseaux sociaux : publications, visuels et animation\n• Emailing : newsletters et relances automatiques",
+prix:"Nos prix de lancement :\n• SEO : à partir de 75 000 FCFA/mois\n• Publicité : à partir de 75 000 FCFA/mois, hors budget publicitaire\n• Réseaux sociaux : à partir de 50 000 FCFA/mois\n• Emailing : à partir de 50 000 FCFA/mois\nLe tarif exact vous est confirmé avant de commencer.",
+audit:"Deux audits :\n• Audit express (25 000 FCFA) : 30 minutes et 3 constats clairs\n• Audit complet (à partir de 150 000 FCFA) : rapport détaillé et plan d’action sur 3 mois\nLe montant est déduit du suivi si vous continuez avec nous.\nDemander un audit : "+FORM,
+contact:"Écrivez-nous ou appelez-nous :\n• Téléphone : +221 77 829 70 47\n• E-mail : digi@tralink.com\n• Adresse : Rufisque, Dakar\n• Formulaire : "+FORM,
+delai:"Les délais dépendent du service : la publicité peut apporter des demandes en quelques jours, alors que le référencement s’installe sur plusieurs mois.",
+salut:"Bonjour ! Je réponds aux questions sur nos services, nos prix et l’audit."
+};
+var K=[["audit",["audit","diagnostic","analyse"]],["prix",["prix","tarif","cout","combien","fcfa","budget","payer"]],["services",["service","offre","proposez","faites","seo","reference","publicite","pub","reseaux","emailing","newsletter","facebook","instagram","google"]],["contact",["contact","telephone","appeler","mail","adresse","joindre","rendez","devis","ou etes","whatsapp"]],["delai",["delai","resultat","combien de temps","quand","rapide"]],["salut",["bonjour","salut","bonsoir","hello"]]];
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function answer(t){var n=norm(t);for(var i=0;i<K.length;i++){for(var j=0;j<K[i][1].length;j++){if(n.indexOf(K[i][1][j])>-1)return R[K[i][0]]}}
+return "Je n’ai pas la réponse à cette question. Écrivez-nous par le formulaire "+FORM+" ou appelez le +221 77 829 70 47."}
+var box=document.getElementById("tl-box"),btn=document.getElementById("tl-btn"),msgs=document.getElementById("tl-msgs"),q=document.getElementById("tl-q"),inp=document.getElementById("tl-in");
+function add(txt,cls){var d=document.createElement("div");d.className="tl-m "+cls;d.textContent=txt;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+function ask(t){if(!t.trim())return;add(t,"tl-u");add(answer(t),"tl-b")}
+[["Nos services","services"],["Nos prix","prix"],["L’audit","audit"],["Nous contacter","contact"]].forEach(function(p){var b=document.createElement("button");b.type="button";b.textContent=p[0];b.onclick=function(){add(p[0],"tl-u");add(R[p[1]],"tl-b")};q.appendChild(b)});
+add("Bonjour ! Je suis l’assistant de Tralink. Posez votre question ou touchez un sujet ci-dessous.","tl-b");
+btn.onclick=function(){var o=box.classList.toggle("open");btn.setAttribute("aria-expanded",o);btn.textContent=o?"Fermer":"Une question ?";if(o)inp.focus()};
+document.getElementById("tl-f").onsubmit=function(e){e.preventDefault();ask(inp.value);inp.value=""};
+})();
+</script>
+
+<script>
+(function(){var t=[].slice.call(document.querySelectorAll(".tab"));function sel(i){t.forEach(function(b,k){var on=k===i;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;document.getElementById("tp"+k).hidden=!on});t[i].focus()}
+t.forEach(function(b,i){b.onclick=function(){sel(i)};b.onkeydown=function(e){if(e.key==="ArrowRight")sel((i+1)%t.length);else if(e.key==="ArrowLeft")sel((i+t.length-1)%t.length)}})})();
+</script>
+<script>
+(function(){var i=document.getElementById("tl-photo");function f(){i.style.display="none";document.getElementById("tl-ph").style.display="flex"}i.addEventListener("error",f);if(i.complete&&!i.naturalWidth)f()})();
+</script>
 </body>
 </html>
