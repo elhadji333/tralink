@@ -151,6 +151,33 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
 .ad-in .ghost{background:none;color:var(--muted);border:1px solid var(--line);padding:8px 14px;font-size:14px}
 .ad-in details{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:12px}
 .ad-in summary{cursor:pointer;font-weight:600}
+#tl-merci{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:110;width:min(560px,calc(100vw - 24px));background:#12233F;color:#fff;border:1px solid #263A5E;border-radius:12px;padding:16px 18px;box-shadow:0 10px 30px rgba(11,23,48,.35);display:grid;gap:6px}
+#tl-merci[hidden],#tl-wel[hidden]{display:none}
+#tl-merci b{font:700 18px var(--display)}
+#tl-merci p{margin:0;font-size:15px;color:#DCE1EA;line-height:1.5}
+#tl-merci a{color:#fff}
+#tl-merci button,#tl-wel .x{justify-self:start;font:600 14px var(--body);background:none;color:inherit;border:1px solid currentColor;border-radius:999px;padding:6px 14px;cursor:pointer;opacity:.9}
+#tl-wel{position:fixed;left:18px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:60;width:min(340px,calc(100vw - 36px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 10px 30px rgba(11,23,48,.3);display:grid;gap:8px}
+#tl-wel b{font:700 19px var(--display)}
+#tl-wel p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+#tl-wel .row2{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+#tl-wel .go{font:600 14px var(--body);background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+#wm{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:60;width:min(340px,calc(100vw - 36px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(11,23,48,.3);padding:16px 18px;animation:wmin .35s ease-out}
+#wm[hidden]{display:none}
+@keyframes wmin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#wm h3{margin:0 24px 6px 0;font:700 18px var(--display);display:flex;align-items:center;gap:8px}
+#wm h3 svg{width:26px;height:26px;flex:none}
+#wm p{margin:0 0 12px;color:var(--muted);font-size:15px;line-height:1.45}
+#wm .wb{display:flex;gap:8px;flex-wrap:wrap}
+#wm .wb button{font:600 14px var(--body);border-radius:999px;padding:9px 14px;cursor:pointer;border:1px solid var(--line);background:none;color:var(--ink)}
+#wm .wb button.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+#wm-x{position:absolute;top:8px;right:10px;background:none;border:0;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px}
+#ack{position:fixed;inset:0;z-index:130;background:rgba(11,23,48,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+#ack[hidden]{display:none}
+#ack .ack-c{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:14px;max-width:460px;width:100%;padding:28px;text-align:left}
+#ack .ack-i{width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:28px;margin-bottom:14px}
+#ack h2{font:800 26px/1.1 var(--display);letter-spacing:-.02em;margin:0 0 10px;max-width:none}
+#ack p{margin:0 0 10px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -164,7 +191,7 @@ footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px soli
 <div class="hero">
   <div>
     <h1>Plus de clients qualifiés, mesurés au centime près.</h1>
-    <p class="lead">Nous concevons et pilotons vos campagnes en ligne pour que chaque euro investi vous rapporte des demandes, des ventes et des rendez-vous.</p>
+    <p class="lead">Nous concevons et pilotons vos campagnes en ligne pour que chaque franc investi vous rapporte des demandes, des ventes et des rendez-vous.</p>
     </div>
   <div class="chart" role="img" aria-label="Courbe illustrative d’une croissance de demandes clients sur six mois">
     <svg viewBox="0 0 320 200">
@@ -441,6 +468,65 @@ function pubNew(){var c=cfg();if(!c.token){$("ad-cfg").open=true;msg("Enregistre
   chain.then(function(){return getPosts()}).then(function(g){var post={id:id,date:new Date().toISOString().slice(0,10),title:title,text:text,image:img},l=[post].concat(g.list);
     return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Nouvelle actualité").then(function(){POSTS=l;render(l);listAdmin();$("ad-t").value="";$("ad-tx").value="";$("ad-img").value="";msg("Publié ! L’actualité apparaît sur le site dans 1 à 2 minutes.")})}).catch(function(e){msg(e.message||"Erreur",1)})}
 $("ad-pub").onclick=function(){if(editId)saveEdit();else pubNew()};
+})();
+</script>
+<div id="tl-merci" role="status" hidden>
+  <b>Merci, votre demande est bien reçue.</b>
+  <p>Nous avons bien enregistré votre demande d’audit et nous vous répondons sous 48 heures. Une question urgente ? Appelez le +221 77 829 70 47 ou écrivez à <a href="mailto:digi@tralink.com">digi@tralink.com</a>.</p>
+  <button id="tl-merci-x" type="button">Fermer</button>
+</div>
+<div id="tl-wel" role="dialog" aria-label="Bienvenue chez Tralink" hidden>
+  <b>Bienvenue chez Tralink</b>
+  <p>Votre agence de marketing digital à Rufisque, Dakar. Découvrez-nous en 2 minutes, ou posez votre question à notre assistant.</p>
+  <div class="row2"><button class="go" id="tl-wel-go" type="button">Voir la présentation</button><button class="x" id="tl-wel-x" type="button">Fermer</button></div>
+</div>
+<script>
+(function(){
+var M=document.getElementById("tl-merci"),W=document.getElementById("tl-wel");
+function merci(){if(location.hash==="#merci"){M.hidden=false;W.hidden=true}}
+document.getElementById("tl-merci-x").onclick=function(){M.hidden=true;if(location.hash==="#merci")history.replaceState(null,"",location.pathname+location.search)};
+window.addEventListener("hashchange",merci);merci();
+var seen=false;try{seen=localStorage.getItem("tl_welcome")==="1"}catch(e){}
+function done(){W.hidden=true;try{localStorage.setItem("tl_welcome","1")}catch(e){}}
+document.getElementById("tl-wel-x").onclick=done;
+document.getElementById("tl-wel-go").onclick=function(){done();var o=document.getElementById("pv-open");if(o)o.click()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!W.hidden)done()});
+if(!seen&&!M.hidden===false&&location.hash!=="#admin"&&location.hash!=="#merci"){setTimeout(function(){if(M.hidden&&document.getElementById("ad").hidden){W.hidden=false;try{localStorage.setItem("tl_welcome","1")}catch(e){}}},1500)}
+})();
+</script>
+<div id="wm" role="status" aria-label="Message de bienvenue" hidden>
+  <button id="wm-x" type="button" aria-label="Fermer le message">×</button>
+  <h3><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="14" width="26" height="20" rx="10" fill="none" stroke="currentColor" stroke-width="5"/><rect x="18" y="14" width="26" height="20" rx="10" fill="none" style="stroke:var(--muted)" stroke-width="5"/></svg>Bienvenue chez Tralink</h3>
+  <p>Votre agence de marketing digital à Rufisque, Dakar. Découvrez nos services en 2 minutes, ou posez-nous votre question.</p>
+  <div class="wb"><button id="wm-pres" class="pri" type="button">Voir la présentation</button><button id="wm-q" type="button">Poser une question</button></div>
+</div>
+<div id="ack" role="dialog" aria-modal="true" aria-labelledby="ack-t" hidden>
+  <div class="ack-c">
+    <div class="ack-i" aria-hidden="true">✓</div>
+    <h2 id="ack-t">Merci, votre demande est bien reçue</h2>
+    <p>Nous avons bien reçu votre demande d’audit. Nous vous répondons sous 48 heures.</p>
+    <p>Une urgence ? Appelez le <a href="tel:+221778297047">+221 77 829 70 47</a>.</p>
+    <button id="ack-ok" class="btn" type="button" style="margin-top:8px">Retour au site</button>
+  </div>
+</div>
+<script>
+(function(){
+var W=document.getElementById("wm"),A=document.getElementById("ack");
+function $(id){return document.getElementById(id)}
+function seen(){try{return localStorage.getItem("tl_wm")==="1"}catch(e){try{return sessionStorage.getItem("tl_wm")==="1"}catch(e2){return false}}}
+function mark(){try{localStorage.setItem("tl_wm","1")}catch(e){try{sessionStorage.setItem("tl_wm","1")}catch(e2){}}}
+function hideW(){W.hidden=true}
+function hideAck(){A.hidden=true;document.body.style.overflow=""}
+function showAck(){hideW();A.hidden=false;document.body.style.overflow="hidden";$("ack-ok").focus();try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+if(location.hash==="#merci")showAck();
+else if(location.hash!=="#admin"&&!seen()){setTimeout(function(){if(!A.hidden||!$("pv-modal").hidden||!$("ad").hidden)return;W.hidden=false;mark();setTimeout(hideW,25000)},1500)}
+window.addEventListener("hashchange",function(){if(location.hash==="#merci")showAck()});
+$("wm-x").onclick=hideW;
+$("wm-pres").onclick=function(){hideW();$("pv-open").click()};
+$("wm-q").onclick=function(){hideW();var b=$("tl-btn");if(b&&!$("tl-box").classList.contains("open"))b.click()};
+$("ack-ok").onclick=hideAck;
+A.addEventListener("click",function(e){if(e.target===A)hideAck()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){if(!A.hidden)hideAck();else if(!W.hidden)hideW()}});
 })();
 </script>
 </body>
