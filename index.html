@@ -367,7 +367,8 @@ document.addEventListener("keydown",function(e){if(m.hidden)return;if(e.key==="E
   <label>Titre<input id="ad-t" autocomplete="off"></label>
   <label>Texte<textarea id="ad-tx"></textarea></label>
   <label>Image (facultatif)<input id="ad-img" type="file" accept="image/*"></label>
-  <button id="ad-pub" class="btn" type="button">Publier</button>
+  <label id="ad-rmw" style="display:none;grid-auto-flow:column;justify-content:start;align-items:center;gap:8px"><input id="ad-rm" type="checkbox" style="width:auto"> Retirer l’image actuelle</label>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button id="ad-pub" class="btn" type="button">Publier</button><button id="ad-cancel" class="btn ghost" type="button" style="display:none">Annuler la modification</button></div>
   <p id="ad-st" aria-live="polite"></p>
   <h3 style="margin:8px 0 0">Actualités publiées</h3>
   <div id="ad-list"></div>
@@ -392,9 +393,9 @@ function render(list){PS.textContent="";if(!list||!list.length){SEC.hidden=true;
   list.forEach(function(p){var a=document.createElement("article");var ok=/^images\/[\w.-]+$/.test(p.image||"");a.className="post"+(ok?"":" noimg");
     if(ok){var im=document.createElement("img");im.src=p.image;im.alt=p.title||"";im.loading="lazy";a.appendChild(im)}
     var d=document.createElement("div"),t=document.createElement("time"),h=document.createElement("h3"),q=document.createElement("p"),b=document.createElement("button");
-    t.textContent=fmt(p.date);h.textContent=p.title||"";q.textContent=p.text||"";b.type="button";b.className="sh";b.textContent="Partager";b.onclick=function(){share(p)};
+    t.textContent=fmt(p.date)+(p.edited&&p.edited!==p.date?" · modifié le "+fmt(p.edited):"");h.textContent=p.title||"";q.textContent=p.text||"";b.type="button";b.className="sh";b.textContent="Partager";b.onclick=function(){share(p)};
     d.appendChild(t);d.appendChild(h);d.appendChild(q);d.appendChild(b);a.appendChild(d);PS.appendChild(a)})}
-fetch("posts.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []}).then(function(l){POSTS=Array.isArray(l)?l:[];render(POSTS)});
+fetch("posts.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []}).then(function(l){POSTS=Array.isArray(l)?l:[];render(POSTS);if(!AD.hidden)listAdmin()});
 function cfg(){try{return JSON.parse(localStorage.getItem("tl_admin")||"{}")}catch(e){return {}}}
 function msg(t,err){ST.textContent=t;ST.style.color=err?"#C0392B":"var(--muted)"}
 function api(path,opt){var c=cfg();opt=opt||{};opt.headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+c.token,"X-GitHub-Api-Version":"2022-11-28"};
@@ -408,13 +409,13 @@ function shrink(file){return new Promise(function(res,rej){var im=new Image(),u=
   im.onload=function(){var k=Math.min(1,1200/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=Math.round(im.width*k);cv.height=Math.round(im.height*k);cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);URL.revokeObjectURL(u);
     cv.toBlob(function(b){var fr=new FileReader();fr.onload=function(){res(String(fr.result).split(",")[1])};fr.onerror=rej;fr.readAsDataURL(b)},"image/jpeg",.82)};
   im.onerror=function(){rej(new Error("Image illisible."))};im.src=u})}
-var delId=null;
+var delId=null,editId=null;
 function listAdmin(){LS.textContent="";if(!POSTS.length){var e=document.createElement("p");e.textContent="Aucune actualité pour l’instant.";LS.appendChild(e);return}
   POSTS.forEach(function(p){var r=document.createElement("div"),n=document.createElement("span"),b=document.createElement("button");r.className="ad-it";n.textContent=fmt(p.date)+" · "+(p.title||"(sans titre)");
-    b.type="button";b.className="btn ghost";b.textContent=delId===p.id?"Confirmer":"Supprimer";
+    b.type="button";b.className="btn ghost";b.textContent=delId===p.id?"Confirmer":"Supprimer";var ed=document.createElement("button");ed.type="button";ed.className="btn ghost";ed.textContent="Modifier";ed.onclick=function(){startEdit(p)};
     b.onclick=function(){if(delId!==p.id){delId=p.id;listAdmin();return}delId=null;msg("Suppression en cours…");
-      getPosts().then(function(g){var l=g.list.filter(function(x){return x.id!==p.id});return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Suppression d’une actualité").then(function(){POSTS=l;render(l);listAdmin();msg("Supprimé.")})}).catch(function(e){msg(e.message,1)})};
-    r.appendChild(n);r.appendChild(b);LS.appendChild(r)})}
+      getPosts().then(function(g){var l=g.list.filter(function(x){return x.id!==p.id});return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Suppression d’une actualité").then(function(){POSTS=l;render(l);listAdmin();if(p.image)delFile(p.image);if(editId===p.id)resetEdit();msg("Supprimé.")})}).catch(function(e){msg(e.message,1)})};
+    var w=document.createElement("div");w.style.cssText="display:flex;gap:8px;flex:none";w.appendChild(ed);w.appendChild(b);r.appendChild(n);r.appendChild(w);LS.appendChild(r)})}
 function openAd(){AD.hidden=false;document.body.style.overflow="hidden";var c=cfg();$("ad-repo").value=c.repo||"elhadji333/tralink";$("ad-cfg").open=!c.token;listAdmin()}
 function closeAd(){AD.hidden=true;document.body.style.overflow="";if(location.hash==="#admin")history.replaceState(null,"",location.pathname+location.search)}
 function check(){if(location.hash==="#admin")openAd()}
@@ -422,12 +423,24 @@ window.addEventListener("hashchange",check);check();
 $("ad-close").onclick=closeAd;
 $("ad-save").onclick=function(){var k=$("ad-key").value.trim(),r=$("ad-repo").value.trim();if(!k||!r){msg("Renseignez le dépôt et la clé.",1);return}try{localStorage.setItem("tl_admin",JSON.stringify({repo:r,token:k}))}catch(e){msg("Impossible d’enregistrer sur cet appareil.",1);return}$("ad-key").value="";$("ad-cfg").open=false;msg("Clé enregistrée sur cet appareil.")};
 $("ad-forget").onclick=function(){try{localStorage.removeItem("tl_admin")}catch(e){}$("ad-key").value="";msg("Clé oubliée.")};
-$("ad-pub").onclick=function(){var c=cfg();if(!c.token){$("ad-cfg").open=true;msg("Enregistrez d’abord votre clé d’accès.",1);return}
+function resetEdit(){editId=null;$("ad-t").value="";$("ad-tx").value="";$("ad-img").value="";$("ad-rm").checked=false;$("ad-rmw").style.display="none";$("ad-cancel").style.display="none";$("ad-pub").textContent="Publier"}
+function startEdit(p){editId=p.id;delId=null;$("ad-t").value=p.title||"";$("ad-tx").value=p.text||"";$("ad-img").value="";$("ad-rm").checked=false;$("ad-rmw").style.display=p.image?"grid":"none";$("ad-cancel").style.display="inline-block";$("ad-pub").textContent="Enregistrer les modifications";listAdmin();msg("Vous modifiez : "+(p.title||"(sans titre)"));$("ad-t").scrollIntoView({behavior:"smooth",block:"center"})}
+function delFile(path){if(!/^images\/[\w.-]+$/.test(path||""))return Promise.resolve();return api(path).then(function(r){if(!r.ok)return;return r.json().then(function(j){return api(path,{method:"DELETE",body:JSON.stringify({message:"Suppression d’une image",sha:j.sha,branch:"main"})})})}).catch(function(){})}
+function saveEdit(){var c=cfg();if(!c.token){$("ad-cfg").open=true;msg("Enregistrez d’abord votre clé d’accès.",1);return}
+  var title=$("ad-t").value.trim(),text=$("ad-tx").value.trim(),file=$("ad-img").files[0],rm=$("ad-rm").checked,id=editId,cur=POSTS.filter(function(x){return x.id===id})[0]||{};
+  if(!title&&!text&&!file&&(rm||!cur.image)){msg("Ajoutez un titre, un texte ou une image.",1);return}
+  msg("Enregistrement en cours…");var oldImg="",newImg=null,chain=Promise.resolve();
+  if(file){newImg="images/"+id+"-"+Date.now().toString(36)+".jpg";chain=shrink(file).then(function(b){return put(newImg,b,null,"Remplacement d’une image")})}
+  chain.then(function(){return getPosts()}).then(function(g){var l=g.list.map(function(x){if(x.id!==id)return x;oldImg=x.image||"";var y={id:x.id,date:x.date,title:title,text:text,image:x.image||"",edited:new Date().toISOString().slice(0,10)};if(newImg!==null)y.image=newImg;else if(rm)y.image="";return y});
+    return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Modification d’une actualité").then(function(){POSTS=l;render(l);if(oldImg&&(newImg!==null||rm))delFile(oldImg);resetEdit();listAdmin();msg("Modifié ! Le changement apparaît sur le site dans 1 à 2 minutes.")})}).catch(function(e){msg(e.message||"Erreur",1)})}
+$("ad-cancel").onclick=function(){resetEdit();listAdmin();msg("")};
+function pubNew(){var c=cfg();if(!c.token){$("ad-cfg").open=true;msg("Enregistrez d’abord votre clé d’accès.",1);return}
   var title=$("ad-t").value.trim(),text=$("ad-tx").value.trim(),file=$("ad-img").files[0];if(!title&&!text&&!file){msg("Ajoutez un titre, un texte ou une image.",1);return}
   msg("Publication en cours…");var id=Date.now().toString(36),img="",chain=Promise.resolve();
   if(file){img="images/"+id+".jpg";chain=shrink(file).then(function(b){return put(img,b,null,"Ajout d’une image")})}
   chain.then(function(){return getPosts()}).then(function(g){var post={id:id,date:new Date().toISOString().slice(0,10),title:title,text:text,image:img},l=[post].concat(g.list);
-    return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Nouvelle actualité").then(function(){POSTS=l;render(l);listAdmin();$("ad-t").value="";$("ad-tx").value="";$("ad-img").value="";msg("Publié ! L’actualité apparaît sur le site dans 1 à 2 minutes.")})}).catch(function(e){msg(e.message||"Erreur",1)})};
+    return put("posts.json",b64(JSON.stringify(l,null,1)),g.sha,"Nouvelle actualité").then(function(){POSTS=l;render(l);listAdmin();$("ad-t").value="";$("ad-tx").value="";$("ad-img").value="";msg("Publié ! L’actualité apparaît sur le site dans 1 à 2 minutes.")})}).catch(function(e){msg(e.message||"Erreur",1)})}
+$("ad-pub").onclick=function(){if(editId)saveEdit();else pubNew()};
 })();
 </script>
 </body>
