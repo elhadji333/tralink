@@ -511,6 +511,8 @@ if(!seen&&!M.hidden===false&&location.hash!=="#admin"&&location.hash!=="#merci")
 </div>
 <script>
 (function(){
+if(window.__tlWelcome)return;window.__tlWelcome=1;
+["wm","ack"].forEach(function(id){var all=document.querySelectorAll("#"+id);for(var i=1;i<all.length;i++)all[i].parentNode.removeChild(all[i])});
 var W=document.getElementById("wm"),A=document.getElementById("ack");
 function $(id){return document.getElementById(id)}
 function seen(){try{return localStorage.getItem("tl_wm")==="1"}catch(e){try{return sessionStorage.getItem("tl_wm")==="1"}catch(e2){return false}}}
@@ -527,6 +529,15 @@ $("wm-q").onclick=function(){hideW();var b=$("tl-btn");if(b&&!$("tl-box").classL
 $("ack-ok").onclick=hideAck;
 A.addEventListener("click",function(e){if(e.target===A)hideAck()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){if(!A.hidden)hideAck();else if(!W.hidden)hideW()}});
+})();
+</script>
+<script id="tl-dedupe">
+(function(){
+["wm","ack","pv-modal","ad","tl-box","tl-btn","actualites","presentation","services","apropos","contact"].forEach(function(id){var l=document.querySelectorAll("#"+id);for(var i=1;i<l.length;i++)l[i].remove()});
+setTimeout(function(){var w=document.getElementById("wm");if(!w)return;
+  document.querySelectorAll("body *").forEach(function(e){
+    if(e===w||w.contains(e)||e.contains(w)||e.children.length>8)return;
+    if(/Bienvenue chez Tralink/.test(e.textContent)&&/Voir la présentation/.test(e.textContent)&&getComputedStyle(e).position==="fixed")e.remove()})},1900);
 })();
 </script>
 </body>
